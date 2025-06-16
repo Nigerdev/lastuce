@@ -83,7 +83,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'fr',
 
     /*
     |--------------------------------------------------------------------------
@@ -96,7 +96,18 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'fr',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Available Locales
+    |--------------------------------------------------------------------------
+    |
+    | List of locales supported by the application
+    |
+    */
+
+    'available_locales' => ['fr', 'en'],
 
     /*
     |--------------------------------------------------------------------------
@@ -109,7 +120,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'fr_FR',
 
     /*
     |--------------------------------------------------------------------------
@@ -168,6 +179,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\LocalizationServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -184,5 +196,27 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Supported Locales
+    |--------------------------------------------------------------------------
+    |
+    | List of supported locales for the application
+    |
+    */
+
+    'supported_locales' => [
+        'fr' => [
+            'name' => 'Français',
+            'flag' => '🇫🇷',
+            'rtl' => false,
+        ],
+        'en' => [
+            'name' => 'English',
+            'flag' => '🇺🇸',
+            'rtl' => false,
+        ],
+    ],
 
 ];
