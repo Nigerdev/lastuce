@@ -39,7 +39,7 @@
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100">
         <!-- Navigation -->
-        <nav class="bg-white shadow">
+        <nav class="bg-white shadow" x-data="{ open: false }">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16">
                     <div class="flex">
@@ -77,7 +77,70 @@
 
                     <div class="flex items-center space-x-4">
                         <!-- Language Switcher -->
-                        @include('components.language-switch', ['languages' => $languageLinks])
+                        <div class="hidden sm:block">
+                            @include('components.language-switch', ['languages' => $languageLinks])
+                        </div>
+
+                        <!-- Mobile menu button -->
+                        <div class="sm:hidden">
+                            <button @click="open = !open" type="button" class="bg-white inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-controls="mobile-menu" :aria-expanded="open">
+                                <span class="sr-only">{{ __('Ouvrir le menu principal') }}</span>
+                                <!-- Icon when menu is closed -->
+                                <svg x-show="!open" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                </svg>
+                                <!-- Icon when menu is open -->
+                                <svg x-show="open" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile menu -->
+            <div x-show="open" 
+                 x-transition:enter="transition ease-out duration-200"
+                 x-transition:enter-start="opacity-0 scale-95"
+                 x-transition:enter-end="opacity-100 scale-100"
+                 x-transition:leave="transition ease-in duration-75"
+                 x-transition:leave-start="opacity-100 scale-100"
+                 x-transition:leave-end="opacity-0 scale-95"
+                 class="sm:hidden" id="mobile-menu">
+                <div class="pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
+                    <a href="{{ route('home', ['locale' => app()->getLocale()]) }}" 
+                       class="block pl-3 pr-4 py-2 border-l-4 {{ request()->routeIs('home') ? 'bg-indigo-50 border-indigo-500 text-indigo-700' : 'border-transparent text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300' }} text-base font-medium"
+                       @click="open = false">
+                        {{ __('app.nav.home') }}
+                    </a>
+                    <a href="{{ route('episodes.index', ['locale' => app()->getLocale()]) }}" 
+                       class="block pl-3 pr-4 py-2 border-l-4 {{ request()->routeIs('episodes.*') ? 'bg-indigo-50 border-indigo-500 text-indigo-700' : 'border-transparent text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300' }} text-base font-medium"
+                       @click="open = false">
+                        {{ __('app.nav.episodes') }}
+                    </a>
+                    <a href="{{ route('astuces.index', ['locale' => app()->getLocale()]) }}" 
+                       class="block pl-3 pr-4 py-2 border-l-4 {{ request()->routeIs('astuces.*') ? 'bg-indigo-50 border-indigo-500 text-indigo-700' : 'border-transparent text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300' }} text-base font-medium"
+                       @click="open = false">
+                        {{ __('app.nav.tips') }}
+                    </a>
+                    <a href="{{ route('blog.index', ['locale' => app()->getLocale()]) }}" 
+                       class="block pl-3 pr-4 py-2 border-l-4 {{ request()->routeIs('blog.*') ? 'bg-indigo-50 border-indigo-500 text-indigo-700' : 'border-transparent text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300' }} text-base font-medium"
+                       @click="open = false">
+                        {{ __('app.nav.blog') }}
+                    </a>
+                    <a href="{{ route('contact.create', ['locale' => app()->getLocale()]) }}" 
+                       class="block pl-3 pr-4 py-2 border-l-4 {{ request()->routeIs('contact.*') ? 'bg-indigo-50 border-indigo-500 text-indigo-700' : 'border-transparent text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300' }} text-base font-medium"
+                       @click="open = false">
+                        {{ __('app.nav.contact') }}
+                    </a>
+
+                    <!-- Mobile Language Switcher -->
+                    <div class="border-t border-gray-200 pt-4 pb-3">
+                        <div class="px-3">
+                            <p class="text-sm font-medium text-gray-500 mb-2">{{ __('Langue') }}</p>
+                            @include('components.language-switch', ['languages' => $languageLinks, 'mobile' => true])
+                        </div>
                     </div>
                 </div>
             </div>

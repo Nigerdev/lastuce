@@ -1,17 +1,40 @@
-<div class="relative inline-block text-left" x-data="{ open: false }">
-    <div>
-        <button type="button" 
-                class="inline-flex items-center justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" 
-                @click="open = !open"
-                aria-expanded="true" 
-                aria-haspopup="true">
-            <span class="mr-2">{{ $languageLinks[array_search(true, array_column($languageLinks, 'active'))]['flag'] ?? '🇫🇷' }}</span>
-            <span>{{ $languageLinks[array_search(true, array_column($languageLinks, 'active'))]['name'] ?? 'Français' }}</span>
-            <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-            </svg>
-        </button>
+@php
+    $isMobile = $mobile ?? false;
+@endphp
+
+@if($isMobile)
+    <!-- Mobile Language Links -->
+    <div class="space-y-1">
+        @foreach($languageLinks as $language)
+            <a href="{{ $language['url'] }}" 
+               class="flex items-center px-3 py-2 rounded-md text-sm {{ $language['active'] ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50' }}"
+               onclick="changeLanguage('{{ $language['locale'] }}')">
+                <span class="mr-3 text-lg">{{ $language['flag'] }}</span>
+                <span class="font-medium">{{ $language['name'] }}</span>
+                @if($language['active'])
+                    <svg class="ml-auto h-4 w-4 text-indigo-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                @endif
+            </a>
+        @endforeach
     </div>
+@else
+    <!-- Desktop Language Switcher -->
+    <div class="relative inline-block text-left" x-data="{ open: false }">
+        <div>
+            <button type="button" 
+                    class="inline-flex items-center justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" 
+                    @click="open = !open"
+                    aria-expanded="true" 
+                    aria-haspopup="true">
+                <span class="mr-2">{{ $languageLinks[array_search(true, array_column($languageLinks, 'active'))]['flag'] ?? '🇫🇷' }}</span>
+                <span>{{ $languageLinks[array_search(true, array_column($languageLinks, 'active'))]['name'] ?? 'Français' }}</span>
+                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            </button>
+        </div>
 
     <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50" 
          x-show="open" 
@@ -44,7 +67,8 @@
             @endforeach
         </div>
     </div>
-</div>
+    </div>
+@endif
 
 <script>
 function changeLanguage(locale) {

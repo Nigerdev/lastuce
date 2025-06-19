@@ -45,7 +45,7 @@ class AstucesSoumiseFactory extends Factory
             ),
             'fichier_joint' => $this->faker->optional(0.3)->word . '.pdf',
             'status' => $this->faker->randomElement($statuses),
-            'commentaires_admin' => $this->faker->optional(0.4)->sentence(),
+            'commentaire_admin' => $this->faker->optional(0.4)->sentence(),
         ];
     }
 
@@ -56,7 +56,7 @@ class AstucesSoumiseFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'status' => 'en_attente',
-            'commentaires_admin' => null,
+            'commentaire_admin' => null,
         ]);
     }
 
@@ -67,7 +67,7 @@ class AstucesSoumiseFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'status' => 'approuve',
-            'commentaires_admin' => $this->faker->optional(0.7)->sentence(),
+            'commentaire_admin' => $this->faker->optional(0.7)->sentence(),
         ]);
     }
 
@@ -78,7 +78,7 @@ class AstucesSoumiseFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'status' => 'rejete',
-            'commentaires_admin' => $this->faker->sentence(),
+            'commentaire_admin' => $this->faker->sentence(),
         ]);
     }
 
@@ -128,7 +128,7 @@ class AstucesSoumiseFactory extends Factory
         ];
 
         return $this->state(fn (array $attributes) => [
-            'commentaires_admin' => $this->faker->randomElement($comments),
+            'commentaire_admin' => $this->faker->randomElement($comments),
         ]);
     }
 } 

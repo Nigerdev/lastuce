@@ -265,12 +265,8 @@
                         </div>
                     </div>
                     <div class="absolute top-3 left-3">
-                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium
-                            {{ $episode->type === 'episode' ? 'bg-blue-100 text-blue-800' : '' }}
-                            {{ $episode->type === 'coulisse' ? 'bg-purple-100 text-purple-800' : '' }}
-                            {{ $episode->type === 'bonus' ? 'bg-yellow-100 text-yellow-800' : '' }}
-                            {{ $episode->type === 'special' ? 'bg-green-100 text-green-800' : '' }}">
-                            {{ ucfirst($episode->type ?? 'Episode') }}
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                            Episode
                         </span>
                     </div>
                     <div class="absolute bottom-3 right-3 bg-black/70 text-white text-xs px-2 py-1 rounded">
