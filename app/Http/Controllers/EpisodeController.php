@@ -169,13 +169,13 @@ class EpisodeController extends Controller
 
             // Episode précédent et suivant
             $previousEpisode = Episode::published()
-                ->where('date_diffusion', '<', $episode->date_diffusion)
-                ->orderBy('date_diffusion', 'desc')
+                ->where('date_publication', '<', $episode->date_publication)
+                ->orderBy('date_publication', 'desc')
                 ->first();
 
             $nextEpisode = Episode::published()
-                ->where('date_diffusion', '>', $episode->date_diffusion)
-                ->orderBy('date_diffusion', 'asc')
+                ->where('date_publication', '>', $episode->date_publication)
+                ->orderBy('date_publication', 'asc')
                 ->first();
 
             // Meta données pour le SEO
@@ -185,7 +185,7 @@ class EpisodeController extends Controller
                 'image' => $episode->thumbnail_url,
                 'url' => route('episodes.show', $episode->slug),
                 'type' => 'video',
-                'published_time' => $episode->date_diffusion->toISOString(),
+                'published_time' => $episode->date_publication ? $episode->date_publication->toISOString() : null,
                 'video_url' => $episode->youtube_url,
                 'duration' => $episode->duree
             ];
