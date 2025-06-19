@@ -12,7 +12,7 @@
         <div class="absolute top-40 right-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
         <div class="absolute -bottom-8 left-20 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
     </div>
-    
+
     <!-- Floating Elements -->
     <div class="absolute inset-0 overflow-hidden">
         <div class="absolute top-1/4 left-1/4 animate-float">
@@ -25,7 +25,7 @@
             <div class="w-10 h-10 bg-purple-400/20 rounded-full backdrop-blur-sm"></div>
         </div>
     </div>
-    
+
     <div class="container-astuce relative z-10">
         <div class="grid lg:grid-cols-2 gap-12 items-center">
             <!-- Left Content -->
@@ -36,7 +36,7 @@
                     <span class="text-white font-medium">{{ __('home.badge_text') }}</span>
                     <span class="text-2xl">✨</span>
                 </div>
-                
+
                 <!-- Main Title -->
                 <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
                     <span class="block text-white mb-2">{{ __('home.welcome_text') }}</span>
@@ -44,12 +44,12 @@
                         {{ __('home.site_name') }}
                     </span>
                 </h1>
-                
+
                 <!-- Subtitle -->
                 <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-xl leading-relaxed">
                     {{ __('home.hero_subtitle') }}
                 </p>
-                
+
                 <!-- CTA Buttons -->
                 <div class="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 mb-8">
                     <a href="{{ route('episodes.index', ['locale' => app()->getLocale()]) }}" class="btn-primary animate-pulse-glow">
@@ -59,7 +59,7 @@
                         💡 {{ __('home.suggest_tip.cta') }}
                     </a>
                 </div>
-                
+
                 <!-- Stats -->
                 <div class="grid grid-cols-3 gap-6 max-w-md">
                     <div class="text-center animate-scale-in">
@@ -76,7 +76,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Right Content - Featured Video -->
             <div class="relative animate-scale-in animation-delay-600">
                 <div class="relative rounded-2xl overflow-hidden shadow-2xl">
@@ -86,17 +86,17 @@
                         $featuredVideoId = $matches[1] ?? 'nZrsOHvBvM0';
                         $featuredThumbnailUrl = "https://img.youtube.com/vi/{$featuredVideoId}/maxresdefault.jpg";
                     @endphp
-                    
-                    <div class="aspect-video bg-gradient-to-br from-gray-900 to-gray-800 relative cursor-pointer group" 
+
+                    <div class="aspect-video bg-gradient-to-br from-gray-900 to-gray-800 relative cursor-pointer group"
                          data-video-id="{{ $featuredVideoId }}"
                          data-video-title="{{ __('home.featured_video.title') }}"
                          id="featured-video-container">
                         <!-- Miniature YouTube -->
-                        <img src="{{ $featuredThumbnailUrl }}" 
-                             alt="{{ __('home.featured_video.title') }}" 
+                        <img src="{{ $featuredThumbnailUrl }}"
+                             alt="{{ __('home.featured_video.title') }}"
                              class="w-full h-full object-cover"
                              onerror="this.src='https://img.youtube.com/vi/{{ $featuredVideoId }}/hqdefault.jpg'">
-                        
+
                         <!-- Overlay avec bouton play -->
                         <div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-all flex items-center justify-center">
                             <div class="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center group-hover:bg-red-700 transition-colors shadow-2xl group-hover:scale-110 transform duration-300">
@@ -105,12 +105,12 @@
                                 </svg>
                             </div>
                         </div>
-                        
+
                         <!-- Informations vidéo -->
                         <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
                             <h3 class="text-xl font-bold text-white mb-2">{{ __('home.featured_video.title') }}</h3>
                             <p class="text-gray-300 text-sm">{{ __('home.featured_video.description') }}</p>
-                            
+
                             <!-- Badge YouTube -->
                             <div class="mt-3 flex items-center space-x-2">
                                 <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-600 text-white">
@@ -119,7 +119,7 @@
                                     </svg>
                                     YouTube
                                 </span>
-                                <a href="{{ $featuredVideoUrl }}" target="_blank" 
+                                <a href="{{ $featuredVideoUrl }}" target="_blank"
                                    class="text-gray-300 hover:text-white text-xs transition-colors"
                                    onclick="event.stopPropagation()">
                                     {{ __('Voir sur YouTube') }}
@@ -131,7 +131,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Scroll Indicator -->
     <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white hover:text-blue-400 transition-colors animate-bounce">
         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -151,7 +151,7 @@
                 {{ __('home.latest_episodes.subtitle') }}
             </p>
         </div>
-        
+
         <!-- Episodes Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             @forelse($latestEpisodes as $episode)
@@ -164,15 +164,15 @@
                             $videoId = $matches[1] ?? null;
                             $thumbnailUrl = $videoId ? "https://img.youtube.com/vi/{$videoId}/maxresdefault.jpg" : null;
                         @endphp
-                        
-                        <div class="aspect-video bg-gradient-to-br from-gray-700 to-gray-900 rounded-xl overflow-hidden relative cursor-pointer" 
+
+                        <div class="aspect-video bg-gradient-to-br from-gray-700 to-gray-900 rounded-xl overflow-hidden relative cursor-pointer"
                              onclick="playYouTubeVideo('{{ $videoId }}', this)">
                             @if($thumbnailUrl)
-                                <img src="{{ $thumbnailUrl }}" alt="{{ $episode->titre }}" 
+                                <img src="{{ $thumbnailUrl }}" alt="{{ $episode->titre }}"
                                      class="w-full h-full object-cover"
                                      onerror="this.src='https://img.youtube.com/vi/{{ $videoId }}/hqdefault.jpg'">
                             @endif
-                            
+
                             <!-- Play Button Overlay -->
                             <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/20 transition-all">
                                 <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center group-hover:bg-red-700 transition-colors shadow-lg">
@@ -193,7 +193,7 @@
                             </div>
                         </div>
                     @endif
-                    
+
                     <div class="absolute top-3 left-3">
                         <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium
                             {{ $episode->type === 'episode' ? 'bg-blue-100 text-blue-800' : '' }}
@@ -203,22 +203,22 @@
                             {{ ucfirst($episode->type ?? 'Episode') }}
                         </span>
                     </div>
-                    
+
                     @if($episode->duree)
                     <div class="absolute bottom-3 right-3 bg-black/70 text-white text-xs px-2 py-1 rounded">
                         {{ gmdate('H:i:s', $episode->duree) }}
                     </div>
                     @endif
                 </div>
-                
+
                 <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
                     {{ $episode->titre }}
                 </h3>
-                
+
                 <p class="text-gray-400 text-sm mb-4 line-clamp-2">
                     {{ Str::limit($episode->description, 120) }}
                 </p>
-                
+
                 <div class="flex items-center justify-between">
                     <div class="flex items-center text-gray-500 text-sm">
                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -231,11 +231,11 @@
                         {{ $episode->created_at->diffForHumans() }}
                     </span>
                 </div>
-                
+
                 <!-- Boutons d'action -->
                 <div class="mt-4 flex items-center space-x-2">
                     @if($episode->youtube_url)
-                    <a href="{{ $episode->youtube_url }}" target="_blank" 
+                    <a href="{{ $episode->youtube_url }}" target="_blank"
                        class="flex-1 bg-red-600 hover:bg-red-700 text-white text-sm px-3 py-2 rounded-lg transition-colors text-center">
                         <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
@@ -243,57 +243,17 @@
                         YouTube
                     </a>
                     @endif
-                    
-                    <a href="{{ route('episodes.show', ['locale' => app()->getLocale(), 'slug' => $episode->slug]) }}" 
+
+                    <a href="{{ route('episodes.show', ['locale' => app()->getLocale(), 'slug' => $episode->slug]) }}"
                        class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm px-3 py-2 rounded-lg transition-colors text-center">
                         {{ __('Voir plus') }}
                     </a>
                 </div>
             </div>
             @empty
-            <!-- Fallback si aucun épisode -->
-            @for($i = 1; $i <= 6; $i++)
-            <div class="card-glass group hover:scale-105 transition-all duration-300">
-                <div class="relative mb-4">
-                    <div class="aspect-video bg-gradient-to-br from-gray-700 to-gray-900 rounded-xl overflow-hidden">
-                        <div class="w-full h-full flex items-center justify-center">
-                            <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
-                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M8 5v14l11-7z"/>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="absolute top-3 left-3">
-                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                            Episode
-                        </span>
-                    </div>
-                    <div class="absolute bottom-3 right-3 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                        12:34
-                    </div>
-                </div>
-                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
-                    {{ __('home.sample_episode_title') }} {{ $i }}
-                </h3>
-                <p class="text-gray-400 text-sm mb-4 line-clamp-2">
-                    {{ __('home.sample_episode_description') }}
-                </p>
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center text-gray-500 text-sm">
-                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                        </svg>
-                        {{ number_format(rand(1000, 50000)) }}
-                    </div>
-                    <span class="text-gray-500 text-sm">{{ __('time.days_ago', ['count' => rand(1, 7)]) }}</span>
-                </div>
-            </div>
-            @endfor
             @endforelse
         </div>
-        
+
         <div class="text-center">
             <a href="{{ route('episodes.index', ['locale' => app()->getLocale()]) }}" class="btn-primary">
                 {{ __('home.view_all_episodes') }}
@@ -316,7 +276,7 @@
                 <p class="text-xl text-blue-100 mb-8">
                     {{ __('home.suggest_tip.description') }}
                 </p>
-                
+
                 <div class="space-y-4 mb-8">
                     <div class="flex items-start space-x-3">
                         <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mt-1">
@@ -343,7 +303,7 @@
                         <p class="text-blue-100">{{ __('home.suggest_tip.benefit_3') }}</p>
                     </div>
                 </div>
-                
+
                 <a href="{{ route('astuces.create', ['locale' => app()->getLocale()]) }}" class="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-xl font-semibold text-lg transition duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl inline-flex items-center">
                     💡 {{ __('home.suggest_tip.cta') }}
                     <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -351,7 +311,7 @@
                     </svg>
                 </a>
             </div>
-            
+
             <div class="relative">
                 <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
                     <div class="text-center mb-6">
@@ -363,7 +323,7 @@
                         <h3 class="text-2xl font-bold text-white mb-2">{{ __('home.suggest_tip.form_title') }}</h3>
                         <p class="text-blue-100">{{ __('home.suggest_tip.form_subtitle') }}</p>
                     </div>
-                    
+
                     <div class="space-y-4">
                         <input type="text" placeholder="{{ __('forms.tip_title_placeholder') }}" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-blue-200 focus:ring-2 focus:ring-white focus:border-white">
                         <textarea placeholder="{{ __('forms.tip_description_placeholder') }}" rows="3" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-blue-200 focus:ring-2 focus:ring-white focus:border-white resize-none"></textarea>
@@ -389,7 +349,7 @@
                     {{ __('Découvrez les entreprises qui nous font confiance et collaborent avec nous') }}
                 </p>
             </div>
-            
+
             @if($partners && $partners->count() > 0)
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                     @foreach($partners as $partner)
@@ -427,7 +387,7 @@
                     <p class="text-gray-400 mb-6">{{ __('Soyez le premier à rejoindre notre réseau de partenaires !') }}</p>
                 </div>
             @endif
-            
+
             <div class="text-center">
                 <a href="{{ route('partenariats.create', ['locale' => app()->getLocale()]) }}" class="btn-primary text-lg px-8 py-4">
                     🤝 {{ __('Devenir partenaire') }}
@@ -451,7 +411,7 @@
                 {{ __('home.behind_scenes.subtitle') }}
             </p>
         </div>
-        
+
         <div class="grid lg:grid-cols-2 gap-12 items-center">
             <div class="space-y-8">
                 @for($i = 1; $i <= 3; $i++)
@@ -478,7 +438,7 @@
                 </div>
                 @endfor
             </div>
-            
+
             <div class="relative">
                 <div class="aspect-square bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl overflow-hidden shadow-2xl">
                     <div class="w-full h-full flex items-center justify-center">
@@ -515,17 +475,17 @@ window.VideoPlayer = {
     // Fonction pour jouer une vidéo YouTube directement dans l'élément
     playYouTubeVideo: function(videoId, element) {
         console.log('playYouTubeVideo called with:', videoId, element);
-        
+
         if (!videoId) {
             console.error('Video ID is required');
             return;
         }
-        
+
         if (!element) {
             console.error('Element is required');
             return;
         }
-        
+
         // Créer l'iframe YouTube
         const iframe = document.createElement('iframe');
         iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1`;
@@ -536,53 +496,53 @@ window.VideoPlayer = {
         iframe.allowFullscreen = true;
         iframe.className = 'absolute inset-0 w-full h-full rounded-xl';
         iframe.setAttribute('allowfullscreen', '');
-        
+
         // Remplacer le contenu de l'élément par l'iframe
         element.innerHTML = '';
         element.appendChild(iframe);
-        
+
         // Ajouter une classe pour indiquer que la vidéo est en cours de lecture
         element.classList.add('playing-video');
-        
+
         console.log('Video iframe created and added to element');
     },
 
     // Fonction pour créer un modal de lecture vidéo
     openVideoModal: function(videoId, title) {
         console.log('openVideoModal called with:', videoId, title);
-        
+
         if (!videoId) {
             console.error('Video ID is required for modal');
             return;
         }
-        
+
         // Vérifier si un modal existe déjà
         const existingModal = document.querySelector('.video-modal');
         if (existingModal) {
             this.closeVideoModal(existingModal);
         }
-        
+
         // Créer le modal
         const modal = document.createElement('div');
         modal.className = 'video-modal fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4 opacity-0 transition-opacity duration-300';
-        
+
         const self = this;
         modal.onclick = function(e) {
             if (e.target === modal) {
                 self.closeVideoModal(modal);
             }
         };
-        
+
         // Contenu du modal
         modal.innerHTML = `
             <div class="relative w-full max-w-5xl bg-black rounded-lg overflow-hidden shadow-2xl">
                 <div class="aspect-video">
-                    <iframe 
-                        src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1" 
-                        width="100%" 
-                        height="100%" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    <iframe
+                        src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1"
+                        width="100%"
+                        height="100%"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen
                         class="w-full h-full">
                     </iframe>
@@ -601,11 +561,11 @@ window.VideoPlayer = {
                 ` : ''}
             </div>
         `;
-        
+
         // Ajouter au DOM
         document.body.appendChild(modal);
         document.body.style.overflow = 'hidden';
-        
+
         // Ajouter event listener pour le bouton fermer
         const closeBtn = modal.querySelector('.close-modal-btn');
         if (closeBtn) {
@@ -613,28 +573,28 @@ window.VideoPlayer = {
                 this.closeVideoModal(modal);
             });
         }
-        
+
         // Animation d'entrée
         setTimeout(() => {
             modal.classList.remove('opacity-0');
             modal.classList.add('opacity-100');
         }, 50);
-        
+
         console.log('Video modal created and displayed');
     },
 
     // Fonction pour fermer le modal vidéo
     closeVideoModal: function(modal) {
         console.log('closeVideoModal called');
-        
+
         if (!modal) {
             console.error('Modal element not found');
             return;
         }
-        
+
         modal.classList.remove('opacity-100');
         modal.classList.add('opacity-0');
-        
+
         setTimeout(() => {
             if (modal.parentNode) {
                 document.body.removeChild(modal);
@@ -661,25 +621,25 @@ window.playYouTubeVideo = function(videoId, element) {
 // Initialisation au chargement de la page
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Page loaded, video functions ready');
-    
+
     // Test si les fonctions sont disponibles
     if (typeof window.VideoPlayer.openVideoModal === 'function') {
         console.log('VideoPlayer.openVideoModal function is available');
     } else {
         console.error('VideoPlayer.openVideoModal function is NOT available');
     }
-    
+
     // Ajouter event listener pour la vidéo featured
     const featuredVideo = document.getElementById('featured-video-container');
     if (featuredVideo) {
         console.log('Featured video container found, adding click listener');
-        
+
         featuredVideo.addEventListener('click', function() {
             const videoId = this.getAttribute('data-video-id');
             const videoTitle = this.getAttribute('data-video-title');
-            
+
             console.log('Featured video clicked:', videoId, videoTitle);
-            
+
             if (videoId) {
                 window.VideoPlayer.openVideoModal(videoId, videoTitle);
             } else {
@@ -689,7 +649,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         console.error('Featured video container NOT found');
     }
-    
+
     // Gestion des touches clavier
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
@@ -699,10 +659,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-    
+
     // Lazy loading pour les miniatures YouTube
     const thumbnails = document.querySelectorAll('img[src*="youtube.com"]');
-    
+
     if (thumbnails.length > 0) {
         const imageObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
@@ -713,7 +673,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         });
-        
+
         thumbnails.forEach(img => imageObserver.observe(img));
     }
 });
