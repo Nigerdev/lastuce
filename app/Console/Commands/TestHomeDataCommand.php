@@ -94,7 +94,7 @@ class TestHomeDataCommand extends Command
 
             // Test des partenaires
             $this->info('🤝 PARTENAIRES:');
-            $partnersCount = Partenariat::where('statut', 'accepte')->count();
+            $partnersCount = Partenariat::accepte()->count();
             $this->line("Total partenaires acceptés: {$partnersCount}");
 
         } catch (\Exception $e) {
