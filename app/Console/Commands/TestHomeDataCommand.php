@@ -57,11 +57,11 @@ class TestHomeDataCommand extends Command
             $blogCount = BlogArticle::count();
             $this->line("Total articles: {$blogCount}");
             
-            if (method_exists(BlogArticle::class, 'publishedAndVisible')) {
+            try {
                 $publishedBlogCount = BlogArticle::publishedAndVisible()->count();
                 $this->line("Articles publiés et visibles: {$publishedBlogCount}");
-            } else {
-                $this->error("Méthode publishedAndVisible() n'existe pas sur BlogArticle");
+            } catch (\Exception $e) {
+                $this->error("Erreur avec BlogArticle::publishedAndVisible(): {$e->getMessage()}");
             }
             $this->newLine();
 
@@ -69,8 +69,8 @@ class TestHomeDataCommand extends Command
             $this->info('📊 STATISTIQUES:');
             $stats = [
                 'total_episodes' => Episode::published()->count(),
-                'newsletter_subscribers' => NewsletterAbonne::where('is_active', true)->count(),
-                'approved_astuces' => AstucesSoumise::where('status', 'approuve')->count(),
+                'newsletter_subscribers' => NewsletterAbonne::actif()->count(),
+                'approved_astuces' => AstucesSoumise::approuve()->count(),
             ];
             
             foreach ($stats as $key => $value) {
